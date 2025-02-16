@@ -1,6 +1,6 @@
 {
   "name": "Next.js Dev",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:16",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:19",
   "postCreateCommand": "npm install",
   "portsAttributes": {
     "3000": {
