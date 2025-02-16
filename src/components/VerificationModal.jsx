@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import '../globals.css'
-import { useTheme } from '../lib/ThemeContext'
+import { useTheme } from '../app/lib/ThemeContext'
 import BinanceLoader from './BinanceLoader'
 
 export default function Modal({ displayModal, setDisplayModal, modal, setModal }) {

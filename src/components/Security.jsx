@@ -2,9 +2,9 @@
 import '../globals.css'
 import Icon from "./icon"
 import { useState, useEffect, useRef } from 'react'
-import { useTheme } from '../lib/ThemeContext'
+import { useTheme } from '../app/lib/ThemeContext'
 import BinanceLoader from './BinanceLoader'
-import { useValidatePassword } from '../hooks/useValidate'
+import { useValidatePassword } from '../app/hooks/useValidate'
 import Modal from './VerificationModal'
 
 export default function LoginForm() {

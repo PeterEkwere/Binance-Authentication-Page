@@ -2,10 +2,10 @@
 import '../globals.css'
 import Icon from "./icon"
 import { useState, useEffect } from 'react'
-import { useTheme } from '../lib/ThemeContext'
+import { useTheme } from '../app/lib/ThemeContext'
 import BinanceLoader from './BinanceLoader'
-import { useValidateEmail } from '../hooks/useValidate'
-import { useEmail } from '../lib/EmailContext'
+import { useValidateEmail } from '../app/hooks/useValidate'
+import { useEmail } from '../app/lib/EmailContext'
 import { useRouter } from 'next/navigation'
 
 export default function LoginForm() {
