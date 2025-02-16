@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import '../globals.css'
+import '../app/globals.css'
 import { useTheme } from '../app/lib/ThemeContext'
 import BinanceLoader from './BinanceLoader'
 

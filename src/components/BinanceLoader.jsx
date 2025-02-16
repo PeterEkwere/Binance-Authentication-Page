@@ -10,7 +10,7 @@ const BinanceLoader = () => {
           // - h-2: height of bars (can use h-3, h-4 etc. for taller bars)
           // - bg-yellow-400: color of bars (try bg-yellow-300 for lighter or bg-yellow-500 for darker)
           // - rounded-full: fully rounded edges (use rounded for less rounded)
-          className="w-1 h-4 bg-[black] animate-pulse"
+          className="w-0.5 h-3 bg-[black] animate-pulse"
           style={{
             // Animation configuration
             // - 1.4s: total duration of animation (adjust for faster/slower animation)
