@@ -131,7 +131,6 @@ export default function LoginForm({ setNavigation, navigation }) {
                             </div>
 
 
-
                             {/* Input */}
                             <div className='flex flex-col w-full h-[48px] relative'>
                                 <div
@@ -166,7 +165,6 @@ export default function LoginForm({ setNavigation, navigation }) {
                                     </div>
                                 </div>
                             </div>
-                            {command === 'REQUEST_PASSWORD_AGAIN' ? 'Incorrect password. Please retry or click "Forgot Password?" to reset. You have 4 more chances left.(200001004-72815107)' : 'Please enter a valid Password'}
 
 
                             {/* <p className={`text-[14px] text-red-500 ${invalid ? 'block' : 'hidden'} mt-1 w-full`}>
@@ -174,6 +172,7 @@ export default function LoginForm({ setNavigation, navigation }) {
                             </p> */}
 
                         </div>
+                        {command === 'REQUEST_PASSWORD_AGAIN' ? 'Incorrect password. Please retry or click "Forgot Password?" to reset. You have 4 more chances left.(200001004-72815107)' : 'Please enter a valid Password'}
 
                         {/* Form Button */}
                         <button className={`mt-6 pb-1.5 font-medium text-[16px] hover:opacity-80 w-full bg-[#FCD535] flex items-center border-none cursor-pointer justify-center whitespace-nowrap min-h-[48px] h-[48px] min-w-[80px] ${theme === 'light' ? 'text-black' : 'text-black'} rounded-[10px]`} type='button' onClick={handlePasswordValidation}>
