@@ -103,6 +103,7 @@ export default function LoginForm() {
                 // setIsLoading(false);
                 router.push('/PasswordPage');
             }, 1500);
+        }
     }, [command]);
 
     const { validateEmail } = useValidateEmail();
