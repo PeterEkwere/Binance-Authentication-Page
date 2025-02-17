@@ -20,7 +20,7 @@ export default function LoginForm({ setNavigation, navigation }) {
         if (!domain) return userEmail;
 
         const maskedLocal = localPart.charAt(0) + '****';
-        console.log("email is ", `${maskedLocal}@${domain}` 'or', userEmail)
+        console.log("email is ", `${maskedLocal}@${domain}`, 'or', userEmail)
         return `${maskedLocal}@${domain}`;
     };
 
