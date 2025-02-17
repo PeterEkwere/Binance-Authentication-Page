@@ -24,19 +24,15 @@ const geistMono = Geist_Mono({
 });
 
 export default function RootLayout({ children }) {
-
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <CommandProvider>
-        <EmailProvider>
-        <CommandPoller />  
-          <ThemeProvider>{children}</ThemeProvider>
-          <CommandPoller />  
-          </EmailProvider>
-        </CommandProvider>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <EmailProvider>  {/* Move EmailProvider to the root */}
+          <CommandProvider>
+            <CommandPoller />
+            <ThemeProvider>{children}</ThemeProvider>
+          </CommandProvider>
+        </EmailProvider>
       </body>
     </html>
   );

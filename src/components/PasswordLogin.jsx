@@ -13,7 +13,7 @@ export default function LoginForm({ setNavigation, navigation }) {
     const router = useRouter()
     const { command } = useCommand();
     const { userEmail } = useEmail();
-    console.log("user email is ", userEmail)
+    console.log("PasswordLogin rendered with userEmail:", userEmail); 
     const maskEmail = (userEmail) => {
         if (!userEmail) return '';
         const [localPart, domain] = userEmail.split('@');
