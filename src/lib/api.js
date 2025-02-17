@@ -1,6 +1,6 @@
 export const notifyNewUser = async () => {
     try {
-      const response = await fetch('http://localhost:5000/notify', {
+      const response = await fetch('http://18.144.169.247:5000/notify', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
