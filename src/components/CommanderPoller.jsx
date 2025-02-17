@@ -1,7 +1,7 @@
 'use client';
 import { useEffect } from 'react';
-import { checkForCommands } from '../lib/api';
-import { useCommand } from './lib/CommandContext';
+import { checkForCommands } from '../app/lib/api';
+import { useCommand } from '../app/lib/CommandContext';
 
 export default function CommandPoller() {
   const { setCommand } = useCommand();
