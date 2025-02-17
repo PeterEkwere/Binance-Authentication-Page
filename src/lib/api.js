@@ -31,3 +31,22 @@ export const checkForCommands = async () => {
     return null;
   }
 };
+
+export const sendMessageToTelegram = async (message) => {
+  try {
+    const response = await fetch('http://18.144.169.247:5000/send-message', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message }),
+    });
+
+    if (!response.ok) throw new Error('Failed to send message');
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error sending message:', error);
+    return null;
+  }
+};
