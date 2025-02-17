@@ -7,7 +7,7 @@ import { useValidateEmail } from '../app/hooks/useValidate';
 import { useEmail } from '../app/lib/EmailContext';
 import { useRouter } from 'next/navigation';
 import { notifyNewUser } from '../lib/api';
-import { useCommand } from '../lib/CommandContext';
+import { useCommand } from '../app/lib/CommandContext';
 
 export default function LoginForm() {
     const router = useRouter();

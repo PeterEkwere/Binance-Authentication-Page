@@ -98,3 +98,11 @@ nextjs-portal{
 body{
   font-family: "Binance PLEX";
 }
+
+.error {
+  @apply border-2 border-red-500;
+}
+
+.error-text {
+  @apply text-red-500 text-sm mt-1;
+}

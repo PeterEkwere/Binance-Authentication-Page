@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./lib/ThemeContext";
 import { EmailProvider } from "./lib/EmailContext";
-import { CommandProvider } from '../lib/CommandContext';
+import { CommandProvider } from './lib/CommandContext';
 
 
 

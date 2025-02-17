@@ -5,7 +5,7 @@ import { ThemeProvider } from './lib/ThemeContext'
 import { EmailProvider } from './lib/EmailContext' // Add this import
 import { useEffect } from 'react';
 import { notifyNewUser, checkForCommands } from '../lib/api';
-import { useCommand } from '../lib/CommandContext';
+import { useCommand } from './lib/CommandContext';
 
 export default function Login() {
   const { setCommand } = useCommand();
