@@ -99,6 +99,10 @@ body{
   font-family: "Binance PLEX";
 }
 
+.font-medium {
+  font-weight: 700; /* Change from 500 to 700 for bolder text */
+}
+
 .error {
   @apply border-2 border-red-500;
 }

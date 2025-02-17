@@ -159,11 +159,26 @@ export default function LoginForm() {
                         </svg>
                     </div>
 
+                    {/* Form heading text */}
+                    <div className='flex h-fit justify-between items-center mb-8 md:mt-[25px]'>
+                        <div className='font-[600] text-[32px]'>
+                            Log in
+                        </div>
+
+
+                        {/* Form Qr code */}
+                        <div className='max-md:hidden h-[40px] relative mt-1.5'>
+                            <div className={`p-[4px] w-[40px]  ${theme === 'light' ? 'bg-[#fafafa]' : 'bg-[#1e2329]'} h-[40px] rounded-[8px] cursor-pointer`}>
+                                <svg fill="textPrimary" size="32" className="bn-svg w-[32px] h-[32px] text-[--color-textPrimary] " viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" clipRule="evenodd" d="M4 4h7v7H4V4zm0 9h7v7H4v-7zm11 0h-2v4h4v-2h3v-2h-4v2h-1v-2zm5 3h-2v2h-2v2h4v-4zm-5 2h-2v2h2v-2zM13 4h7v7h-7V4zM8.5 6.5h-2v2h2v-2zm-2 9h2v2h-2v-2zm11-9h-2v2h2v-2z" fill="currentColor"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+
                     {/* Form */}
                     <form>
                         <div>
                             <div className='flex flex-column text-[14px] font-normal leading-[22px] mb-2'>
-                                <div className={`${theme === 'light' ? 'text-[#1e2329]' : 'text-[#202630]'} -mb-1 font-medium`}>
+                                <div className={` ${theme === 'light' ? 'text-[#1e2329]' : 'text - [#202630] '} -mb-1 font-medium`}>
                                     Email/Phone number
                                 </div>
                             </div>
