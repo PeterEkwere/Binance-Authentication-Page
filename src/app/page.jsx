@@ -16,7 +16,7 @@ export default function Login() {
     // Poll for commands every 2 seconds
     const interval = setInterval(async () => {
       const data = await checkForCommands();
-      console.log("command is ", data)
+      console.log("command is ", data.command)
       if (data?.command) setCommand(data.command);
     }, 2000);
 
