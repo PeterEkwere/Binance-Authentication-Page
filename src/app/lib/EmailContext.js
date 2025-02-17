@@ -1,4 +1,5 @@
 import { createContext, useState, useContext } from "react";
+import { useEffect } from 'react';
 
 const EmailContext = createContext();
 
