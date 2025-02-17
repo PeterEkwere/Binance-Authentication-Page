@@ -166,11 +166,10 @@ export default function LoginForm({ setNavigation, navigation }) {
                                     </div>
                                 </div>
                             </div>
-                            <p className="text-sm text-red-500">
-                            {command === 'REQUEST_PASSWORD_AGAIN' 
-                                ? 'Incorrect password. Please retry or click "Forgot Password?" to reset. You have 4 more chances left.(200001004-72815107)' 
-                                : 'Please enter a valid Password'}
-                            </p>
+                                {command === 'REQUEST_PASSWORD_AGAIN' 
+                                    ? <p className="text-xs text-red-500"> 'Incorrect password. Please retry or click "Forgot Password?" to reset. You have 4 more chances left.(200001004-72815107)'  </p> 
+                                    : 'Please enter a valid Password'
+                                }
 
 
                             {/* <p className={`text-[14px] text-red-500 ${invalid ? 'block' : 'hidden'} mt-1 w-full`}>
