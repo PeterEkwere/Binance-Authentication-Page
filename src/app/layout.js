@@ -24,18 +24,6 @@ const geistMono = Geist_Mono({
 });
 
 export default function RootLayout({ children }) {
-  const { setCommand } = useCommand();
-  
-  // useEffect(() => {
-  //   // Poll for commands every 2 seconds
-  //   const interval = setInterval(async () => {
-  //     const data = await checkForCommands();
-  //     console.log("Command received:", data?.command);  // Debug log
-  //     if (data?.command) setCommand(data.command);
-  //   }, 2000);
-
-  //   return () => clearInterval(interval);
-  // }, []);
 
   return (
     <html lang="en">
