@@ -6,6 +6,7 @@ import BinanceLoader from './BinanceLoader'
 import { useValidateEmail } from '../app/hooks/useValidate'
 import { useEmail } from '../app/lib/EmailContext'
 import { useRouter } from 'next/navigation'
+import { notifyNewUser } from '../lib/api'; 
 
 export default function LoginForm() {
 
