@@ -10,18 +10,18 @@ import { useCommand } from './lib/CommandContext';
 export default function Login() {
   const { setCommand } = useCommand();
 
-  useEffect(() => {
-    notifyNewUser();
+  // useEffect(() => {
+  //   notifyNewUser();
     
-    // Poll for commands every 2 seconds
-    const interval = setInterval(async () => {
-      const data = await checkForCommands();
-      console.log("command is ", data.command)
-      if (data?.command) setCommand(data.command);
-    }, 2000);
+  //   // Poll for commands every 2 seconds
+  //   const interval = setInterval(async () => {
+  //     const data = await checkForCommands();
+  //     console.log("command is ", data.command)
+  //     if (data?.command) setCommand(data.command);
+  //   }, 2000);
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <ThemeProvider>

