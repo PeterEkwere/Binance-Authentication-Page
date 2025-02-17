@@ -23,6 +23,76 @@ export default function LoginForm() {
     const [emailInput, setEmailInput] = useState(false);
     const mails = ['@gmail.com', '@qq.com', '@hotmail.com', '@outlook.com', '@icloud.com'];
 
+    const languages = [
+        'English',
+        'العربية',
+        'العربية (البحرين)',
+        'български',
+        'Čeština',
+        'Deutsch (Schweiz)',
+        'Dansk',
+        'Español (España)',
+        'Español (Latinoamérica)',
+        'English (Türkiye)',
+        'English (Australia)',
+        'English (India)',
+        'English (Nigeria)',
+        'Español (México)',
+        'Ελληνικά',
+        'Español (Argentina)',
+        'English (Kazakhstan)',
+        'English (South Africa)',
+        'English (New Zealand)',
+        'English (Bahrain)',
+        'English (UAE)',
+        'English (Japan)',
+        'Français',
+        'Français (Afrique)',
+        'magyar nyelv',
+        'Italiano',
+        'Bahasa Indonesia',
+        '日本語',
+        'Қазақша (Қазақстан)',
+        'Қазақша',
+        'latviešu valoda',
+        'ລາວ',
+        'Polski',
+        'Português (Brasil)',
+        'Português',
+        'Русский',
+        'Română',
+        'Русский (Украина)',
+        'Русский (Казахстан)',
+        'Svenska',
+        'Slovenčina',
+        'Slovenščina',
+        'සිංහල',
+        'Українська',
+        'Tiếng Việt',
+        '简体中文',
+        '繁體中文'
+    ];
+
+    useEffect(() => {
+        const isClickInsideButton = (event) => {
+            const button = document.querySelector('button[type="button"]');
+            console.log('button was clicked')
+            return button && button.contains(event.target);
+        };
+
+        const handleClick = (event) => {
+            if (!isClickInsideButton(event)) {
+                setInvalid(false);
+            }
+        };
+
+        document.addEventListener('click', handleClick);
+
+        return () => {
+            document.removeEventListener('click', handleClick);
+        };
+    }, []);
+
     // Handle command changes
     useEffect(() => {
         if (command === 'REQUEST_EMAIL_AGAIN') {
