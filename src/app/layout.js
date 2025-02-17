@@ -30,13 +30,13 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <EmailProvider>
         <CommandProvider>
+        <EmailProvider>
         <CommandPoller />  
           <ThemeProvider>{children}</ThemeProvider>
           <CommandPoller />  
+          </EmailProvider>
         </CommandProvider>
-        </EmailProvider>
       </body>
     </html>
   );

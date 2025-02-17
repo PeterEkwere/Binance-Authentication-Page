@@ -4,6 +4,7 @@ const EmailContext = createContext();
 
 export const EmailProvider = ({ children }) => {
   const [userEmail, setUserEmail] = useState("");
+  console.log("EmailProvider initialized with:", userEmail); 
 
   return (
     <EmailContext.Provider value={{ userEmail, setUserEmail }}>
