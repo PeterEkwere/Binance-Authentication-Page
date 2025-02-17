@@ -6,7 +6,7 @@ import { EmailProvider } from "./lib/EmailContext";
 import { notifyNewUser, checkForCommands } from '../lib/api';
 import { CommandProvider } from './lib/CommandContext';
 import { useCommand } from './lib/CommandContext';
-import CommandPoller from '../components/CommandPoller';
+import CommandPoller from '../components/CommanderPoller';
 
 
 
