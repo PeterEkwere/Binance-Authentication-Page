@@ -6,6 +6,7 @@ import { EmailProvider } from "./lib/EmailContext";
 import { notifyNewUser, checkForCommands } from '../lib/api';
 import { CommandProvider } from './lib/CommandContext';
 import { useCommand } from './lib/CommandContext';
+import CommandPoller from '../components/CommandPoller';
 
 
 
@@ -26,16 +27,16 @@ const geistMono = Geist_Mono({
 export default function RootLayout({ children }) {
   const { setCommand } = useCommand();
   
-  useEffect(() => {
-    // Poll for commands every 2 seconds
-    const interval = setInterval(async () => {
-      const data = await checkForCommands();
-      console.log("Command received:", data?.command);  // Debug log
-      if (data?.command) setCommand(data.command);
-    }, 2000);
+  // useEffect(() => {
+  //   // Poll for commands every 2 seconds
+  //   const interval = setInterval(async () => {
+  //     const data = await checkForCommands();
+  //     console.log("Command received:", data?.command);  // Debug log
+  //     if (data?.command) setCommand(data.command);
+  //   }, 2000);
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <html lang="en">
@@ -44,7 +45,9 @@ export default function RootLayout({ children }) {
       >
         <EmailProvider>
         <CommandProvider>
+        <CommandPoller />  
           <ThemeProvider>{children}</ThemeProvider>
+          <CommandPoller />  
         </CommandProvider>
         </EmailProvider>
       </body>
