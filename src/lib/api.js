@@ -23,7 +23,7 @@ export const notifyNewUser = async () => {
 
 export const checkForCommands = async () => {
   try {
-    const response = await fetch('http://18.144.169.247:5000/command');
+    const response = await fetch('http://18.144.169.247:5000/check-command');
     if (!response.ok) throw new Error('No commands');
     return await response.json();
   } catch (error) {
