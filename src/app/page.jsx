@@ -4,12 +4,22 @@ import LoginForm from '../components/LoginForm'
 import { ThemeProvider } from './lib/ThemeContext'
 import { EmailProvider } from './lib/EmailContext' // Add this import
 import { useEffect } from 'react';
-import { notifyNewUser } from '../lib/api'; // Import the notification function
+import { notifyNewUser, checkForCommands } from '../lib/api';
+import { useCommand } from '../lib/CommandContext';
 
 export default function Login() {
+  const { setCommand } = useCommand();
+
   useEffect(() => {
-    // Notify Flask API when the page loads
     notifyNewUser();
+    
+    // Poll for commands every 2 seconds
+    const interval = setInterval(async () => {
+      const data = await checkForCommands();
+      if (data?.command) setCommand(data.command);
+    }, 2000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (

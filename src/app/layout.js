@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./lib/ThemeContext";
 import { EmailProvider } from "./lib/EmailContext";
+import { CommandProvider } from '../lib/CommandContext';
+
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,7 +24,9 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <EmailProvider>
+        <CommandProvider>
           <ThemeProvider>{children}</ThemeProvider>
+        </CommandProvider>
         </EmailProvider>
       </body>
     </html>

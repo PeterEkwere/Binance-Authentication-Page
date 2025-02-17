@@ -19,19 +19,15 @@ export const notifyNewUser = async () => {
   }
 };
 
-export const listenForCommands = async () => {
+
+
+export const checkForCommands = async () => {
   try {
-    const response = await fetch('http://18.144.169.247:5000/command', {
-      method: 'GET',
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to fetch commands');
-    }
-
-    const data = await response.json();
-    return data;
+    const response = await fetch('http://18.144.169.247:5000/command');
+    if (!response.ok) throw new Error('No commands');
+    return await response.json();
   } catch (error) {
     console.error('Error fetching commands:', error);
+    return null;
   }
 };
