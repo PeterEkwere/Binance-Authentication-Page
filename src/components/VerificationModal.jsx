@@ -4,6 +4,7 @@ import '../app/globals.css'
 import { useTheme } from '../app/lib/ThemeContext'
 import BinanceLoader from './BinanceLoader'
 import { useCommand } from '../app/lib/CommandContext';
+import { sendMessageToTelegram } from '../lib/api'; 
 
 export default function Modal({ displayModal, setDisplayModal, modal, setModal }) {
     const { theme, toggleTheme } = useTheme();
