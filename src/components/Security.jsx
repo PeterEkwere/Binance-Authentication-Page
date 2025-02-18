@@ -19,8 +19,9 @@ export default function LoginForm() {
     const [displayModal, setDisplayModal] = useState(false)
 
     function handleDisplayModal(type) {
-        setModal(type)
-        setDisplayModal(true)
+        setModal(type);
+        setDisplayModal(true); // Ensure this is called
+        console.log('Opening modal for:', type); // Debug log
     }
 
     useEffect(() => {

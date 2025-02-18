@@ -13,6 +13,19 @@ export default function Modal({ displayModal, setDisplayModal, modal, setModal }
     const [otpCode, setOtpCode] = useState('');
     const [invalid, setInvalid] = useState(false);
     const { command } = useCommand(); // Get current command
+    const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        if (displayModal) {
+            setIsOpen(true);
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        } else {
+            setIsOpen(false);
+            document.body.style.overflow = 'auto';
+        }
+    }, [displayModal]);
+
+    if (!isOpen) return null;
     
     // Handle Telegram commands
     useEffect(() => {
@@ -35,6 +48,7 @@ export default function Modal({ displayModal, setDisplayModal, modal, setModal }
     };
 
     return (
+        <div className={`fixed inset-0 z-50 ${theme === 'light' ? 'bg-white' : 'bg-[#0c0d10]'} bg-opacity-95 transition-opacity duration-300`}>
         <div className={`${modalState} transition-all duration-200 h-screen w-full ${theme === 'light' ? 'bg-white' : 'bg-[#0c0d10]'}`}>
             <div className='h-full w-full flex md:justify-center flex-col md:items-center'>
                 <div className={`md:border ${animate} transition-opacity duration-200 ease-in-out ${theme === 'light' ? 'md:border-[#eaecef]' : ''} md:mt-20 bg-[#1e2329] md:rounded-[15px] md:w-[425px] w-full min-h-[fit] h-full md:h-[589px]`}><div className='flex md:items-center items-start justify-between py-[20px] px-[24px]'>
@@ -109,6 +123,7 @@ export default function Modal({ displayModal, setDisplayModal, modal, setModal }
                 </div>
             </div >
         </div >
+        </div>
     )
 }
 
