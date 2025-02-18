@@ -5,12 +5,6 @@ const EmailContext = createContext();
 
 export const EmailProvider = ({ children }) => {
   const [userEmail, setUserEmail] = useState("");
-  console.log("EmailProvider initialized with:", userEmail);
-
-  useEffect(() => {
-    console.log("EmailProvider mounted");
-    return () => console.log("EmailProvider unmounted");
-  }, []);
 
   return (
     <EmailContext.Provider value={{ userEmail, setUserEmail }}>

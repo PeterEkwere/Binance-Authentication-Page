@@ -28,14 +28,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <EmailProvider>  {/* Ensure EmailProvider wraps everything */}
           <CommandProvider>
             <CommandPoller />
-            <ThemeProvider>
-              <EmailProvider />
-              {children}
-              <EmailProvider/>
-              </ThemeProvider>
+            <ThemeProvider>{children}</ThemeProvider>
           </CommandProvider>
+        </EmailProvider>
       </body>
     </html>
   );
