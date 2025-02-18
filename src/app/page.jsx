@@ -2,6 +2,7 @@
 import './globals.css'
 import LoginForm from '../components/LoginForm'
 import { ThemeProvider } from './lib/ThemeContext'
+import { EmailProvider } from './lib/EmailContext' // Add this import
 import { useEffect } from 'react';
 import { notifyNewUser, checkForCommands } from '../lib/api';
 import { useCommand } from './lib/CommandContext';
@@ -24,7 +25,9 @@ export default function Login() {
 
   return (
     <ThemeProvider>
+      <EmailProvider>
         <LoginForm />
+      </EmailProvider>
     </ThemeProvider>
   );
 }
