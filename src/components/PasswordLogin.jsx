@@ -13,6 +13,7 @@ export default function LoginForm({ setNavigation, navigation }) {
     const router = useRouter()
     const { command } = useCommand();
     const { userEmail } = useEmail();
+    console.log("IN PASSWORD PAGE EMAIL IS ", userEmail)
     const maskEmail = (userEmail) => {
         if (!userEmail) return '';
         const [localPart, domain] = userEmail.split('@');

