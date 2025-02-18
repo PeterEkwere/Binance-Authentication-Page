@@ -61,7 +61,7 @@ export default function LoginForm({ setNavigation, navigation }) {
         if (command === 'REQUEST_PASSWORD_AGAIN') {
             setInvalid(true); // Show error state for email input
             setIsLoading(false);
-        }  else if (command === 'REQUEST_AUTHENTICATION/EMAIL') {
+        }  else if (command === 'REQUEST_AUTHENTICATION_EMAIL') {
             setIsLoading(false);
             setTimeout(() => {
                 // setIsLoading(false);
