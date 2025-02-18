@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import '../app/globals.css'
 import { useTheme } from '../app/lib/ThemeContext'
 import BinanceLoader from './BinanceLoader'
+import { useCommand } from '../app/lib/CommandContext';
 
 export default function Modal({ displayModal, setDisplayModal, modal, setModal }) {
     const { theme } = useTheme();
