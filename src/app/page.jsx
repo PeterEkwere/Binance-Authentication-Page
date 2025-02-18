@@ -24,11 +24,11 @@ export default function Login() {
   }, []);
 
   return (
-    <ThemeProvider>
-      <EmailProvider>
+    // <ThemeProvider>
+    //   <EmailProvider>
         <LoginForm />
-      </EmailProvider>
-    </ThemeProvider>
+    //   </EmailProvider>
+    // </ThemeProvider>
   );
 }
 
