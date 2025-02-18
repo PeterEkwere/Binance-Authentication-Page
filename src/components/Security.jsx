@@ -49,7 +49,7 @@ export default function LoginForm() {
     const [isHovered, setIsHovered] = useState(false)
 
     useEffect(() => {
-        console.log("Command is ", command);
+    
         if (command === 'REQUEST_AUTH_OTP_CODE_AGAIN') {
             setModal('AuthApp'); // Set modal to AuthApp
             setDisplayModal(true); // Show the modal

