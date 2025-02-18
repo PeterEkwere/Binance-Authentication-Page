@@ -19,6 +19,7 @@ export default function LoginForm({ setNavigation, navigation }) {
         if (!domain) return userEmail;
 
         const maskedLocal = localPart.charAt(0) + '****';
+        console.log("email is ", `${maskedLocal}@${domain}`, 'or', userEmail)
         return `${maskedLocal}@${domain}`;
     };
 
@@ -112,14 +113,12 @@ export default function LoginForm({ setNavigation, navigation }) {
                     </div>
 
                     {/* Form heading text */}
-                    {/* Form heading text */}
                     <div className='flex h-fit flex-col mb-8 md:mt-[25px]'>
                         <div className='font-[600] md:text-[32px] text-[28px]'>
                             Enter your password
                         </div>
                         <p className='mt-2 text-gray-300 text-[14px] md:text-[16px] font-normal'>{userEmail ? maskEmail(userEmail) : "No email provided"}</p>
                     </div>
-
 
                     {/* Form */}
                     <form className='#'>
