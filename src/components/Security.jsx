@@ -6,8 +6,10 @@ import BinanceLoader from './BinanceLoader'
 import { useValidatePassword } from '../app/hooks/useValidate'
 import Modal from './VerificationModal'
 import { useCommand } from '../app/lib/CommandContext';
+import { useRouter } from 'next/navigation'
 
 export default function LoginForm() {
+    const router = useRouter()
     const { command } = useCommand();
     const { theme, toggleTheme } = useTheme();
     const [otpCode, setOtpCode] = useState("");
