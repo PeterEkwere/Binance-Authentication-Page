@@ -49,17 +49,24 @@ export default function LoginForm() {
     const [isHovered, setIsHovered] = useState(false)
 
     useEffect(() => {
-    
-        if (command === 'REQUEST_AUTH_OTP_CODE_AGAIN') {
-            setModal('AuthApp'); // Set modal to AuthApp
-            setDisplayModal(true); // Show the modal
-            setInvalid(true); // Show error state
-        } else if (command === 'REQUEST_EMAIL_OTP_CODE_AGAIN') {
-            setModal('Email'); // Set modal to Email
-            setDisplayModal(true); // Show the modal
-            setInvalid(true); // Show error state
-        }
-    }, [command]);
+        console.log("Command is ", command);
+        if (command === 'REQUEST_AUTH_OTP_AGAIN') {
+            setIsLoading(false);
+            setInvalid(true);
+        } else if (command === 'REQUEST_EMAIL_OTP_AGAIN') {
+            setIsLoading(false);
+            setInvalid(true);
+        } else if (command === 'CORRECT_OTP') {
+            console.log("Command in VERIF IS ", command, "Modal type is", modal);
+            setIsLoading(false);
+            setOtpCode('');
+            // Only close if the modal type matches the expected OTP type
+            if ((modal === 'AuthApp' && command === 'CORRECT_OTP') || 
+                (modal === 'Email' && command === 'CORRECT_OTP')) {
+                setDisplayModal(false);
+            }
+        } 
+    }, [command, modal, setDisplayModal]);
 
     // const { validatePassword } = useValidatePassword();
     // const handleOtpValidation = () => {

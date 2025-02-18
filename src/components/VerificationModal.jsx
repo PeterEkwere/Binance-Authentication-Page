@@ -18,20 +18,18 @@ export default function Modal({ displayModal, setDisplayModal, modal, setModal }
     useEffect(() => {
         console.log("Command is ", command);
         if (command === 'REQUEST_AUTH_OTP_AGAIN') {
-            console.log("COMMAND IN VEFIR IS ", command)
             setIsLoading(false);
             setInvalid(true);
         } else if (command === 'REQUEST_EMAIL_OTP_AGAIN') {
-            console.log("Command in VERIF IS ", command)
             setIsLoading(false);
             setInvalid(true);
         } else if (command === 'CORRECT_OTP') {
-            console.log("Command in VERIF IS ", command)
+            console.log("Closing modal for:", modal);
             setIsLoading(false);
             setOtpCode('');
-            setDisplayModal(false);
+            setDisplayModal(false); // Close regardless of modal type
         }
-    }, [command]);
+    }, [command, modal, setDisplayModal]);
 
     // Modal visibility effect - this was missing in your current implementation
     useEffect(() => {
@@ -75,7 +73,10 @@ export default function Modal({ displayModal, setDisplayModal, modal, setModal }
     };
 
     return (
-    <div className={`${modalState} transition-all duration-200 h-screen w-full ${theme === 'light' ? 'bg-white' : 'bg-[#0c0d10]'}`} onClick={handleContainerClick}>
+        <div 
+        className={`${modalState} transition-all duration-200 h-screen w-full ${theme === 'light' ? 'bg-white' : 'bg-[#0c0d10]'}`}
+        onClick={() => setInvalid(false)} // Add this line
+        >
             <div className='h-full w-full flex md:justify-center flex-col md:items-center'>
                 <div className={`md:border ${animate} transition-opacity duration-200 ease-in-out ${theme === 'light' ? 'md:border-[#eaecef]' : ''} md:mt-20 bg-[#1e2329] md:rounded-[15px] md:w-[425px] w-full min-h-[fit] h-full md:h-[589px]`}>
                     <div className='flex md:items-center items-start justify-between py-[20px] px-[24px]'>
@@ -120,7 +121,10 @@ export default function Modal({ displayModal, setDisplayModal, modal, setModal }
                                             <input
                                                 type={'text'}
                                                 value={otpCode}
-                                                onChange={(e) => setOtpCode(e.target.value)}
+                                                onChange={(e) => {
+                                                    setOtpCode(e.target.value);
+                                                    setInvalid(false); // Clear error on input change
+                                                }}
                                                 spellCheck={false}
                                                 placeholder={`Enter 6-digit ${modal === 'AuthApp' ? 'authenticator' : 'email'} code`}
                                                 className={`text-[16px] ${theme === 'light' ? 'bg-white text-[#1e2329]' : 'bg-[#1e2329] text-white'} m-0 pb-1 leading-[24px] focus:outline-none font-medium flex-grow caret-[#FCD535]`}
