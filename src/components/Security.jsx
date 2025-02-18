@@ -68,7 +68,7 @@ export default function LoginForm() {
         //     router.push('/AuthenticationPage');
         //   }, 1500);
         }
-      }, [command, modal, router]);
+      }, [command]);
 
     // const { validatePassword } = useValidatePassword();
     const handleOtpValidation = () => {
