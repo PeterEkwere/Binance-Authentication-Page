@@ -6,7 +6,10 @@ import BinanceLoader from './BinanceLoader'
 import { useCommand } from '../app/lib/CommandContext';
 
 export default function Modal({ displayModal, setDisplayModal, modal, setModal }) {
-    const { theme } = useTheme();
+    const { theme, toggleTheme } = useTheme();
+    const [isLoading, setIsLoading] = useState(false)
+    const [modalState, setModalState] = useState(`invisible fixed opacity-0`) // Changed from hidden to invisible
+    const [animate, setAnimate] = useState('opacity-0')
     const [otpCode, setOtpCode] = useState('');
     const [invalid, setInvalid] = useState(false);
     const { command } = useCommand(); // Get current command
